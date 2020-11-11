@@ -129,10 +129,6 @@ class GoFish
     puts "The winner is the collector of the most books at the end of the game."
 
 
-    # remove
-    @deck.deal(@players[1], 37)
-
-
     # precheck completed books
     puts "\nPrecheck completed books:"
     @players.each.with_index do |p, index|
@@ -153,11 +149,6 @@ class GoFish
           puts "#{c.value} of #{c.suit}"
         end
 
-        sort(@players[1])
-        puts "\n|| Opponent's Hand:"
-        @players[1].hand.getCards.each do |c|
-          puts "#{c.value} of #{c.suit}"
-        end
 
         while true
 
@@ -216,7 +207,9 @@ class GoFish
 
         fish = @deck.deal(currentPlayer, 1)[0]
 
-        puts "\nDrew #{fish.value} of #{fish.suit}."
+        unless currentPlayer.isBot
+          puts "\nDrew #{fish.value} of #{fish.suit}."
+        end
 
       else
         print "#{target.name} gave "
